@@ -22,6 +22,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener{
     private int seconds = 0;
     private int timerReset = 0;
     private TextView ft;
+    private TextView tu;
     private boolean paused = true;
     private FloatingActionButton fab;
     private Drawable PLAY;
@@ -56,6 +57,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener{
         super.onViewCreated(view, savedInstanceState);
 
         ft = view.findViewById(R.id.fragment_text);
+        tu = view.findViewById(R.id.timeUp);
         seconds = getArguments().getInt("Seconds");
         timerReset = seconds;
         fab = view.findViewById(R.id.play_pause_fab);
@@ -103,6 +105,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener{
                     min = (timerReset % 3600) / 60;
                     hour = timerReset / 3600;
                     ft.setText(String.format("%02d : %02d : %02d", hour, min, sec));
+                    tu.setText("Time's up!");
                 }
             }
         });
@@ -112,6 +115,7 @@ public class TimerFragment extends Fragment implements View.OnClickListener{
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.play_pause_fab:
+                tu.setText(" ");
                 setIcon();
                 startTimer();
                 break;
